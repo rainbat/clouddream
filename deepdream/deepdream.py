@@ -64,8 +64,8 @@ def make_step(net, step_size=1.5, end='inception_4c/output', jitter=32, clip=Tru
         bias = net.transformer.mean['data']
         src.data[:] = np.clip(src.data, -bias, 255-bias)    
 
-def deepdream(net, base_img, my_step_size="1.5", iter_n=10, octave_n=4, octave_scale=1.4, end='inception_4c/output', clip=True, **step_params):
-    
+
+def deepdream(net, base_img, my_step_size="1.5", iter_n=10, octave_n=4, octave_scale=1.4, end='inception_4c/output', clip=True, **step_params):    
     # prepare base images for all octaves
     octaves = [preprocess(net, base_img)]
     for i in xrange(octave_n-1):
@@ -113,23 +113,12 @@ img = np.float32(img)
 frame = img
 #frame_i = 0
 
-
-#print sys.argv[1]
-#print sys.argv[2]
-
-#print "...... processing with param end=" + sys.argv[2]
-#print "...... processing with param step=" + sys.argv[1]
-
-#print "This is the name of the script: ", sys.argv[0]
-#print "Number of arguments: ", len(sys.argv)
-#print "The arguments are: " , str(sys.argv)
-
 frame = deepdream(net, img, end=sys.argv[2], my_step_size=sys.argv[1])
-#frame = deepdream(net, base_img=frame, iter_n=10, octave_n=4, octave_scale=1.4, end='inception_4c/output', clip=True, **step_params)
+#frame = deepdream(net, base_img=frame, iter_n=10, octave_n=4, octave_scale=1.4, end='inception_4c/output', clip=True)
 #frame = deepdream(net, img, end='inception_3b/5x5_reduce')
 #frame = deepdream(net, img, end='conv2/3x3')
 
-#PIL.Image.fromarray(np.uint8(frame)).save("output.jpg")
+PIL.Image.fromarray(np.uint8(frame)).save("output.jpg")
 
 #h, w = frame.shape[:2]
 #s = 0.05 # scale coefficient

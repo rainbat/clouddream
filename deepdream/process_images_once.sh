@@ -13,7 +13,7 @@ do
     cd /opt/deepdream
     
     insert="_${file2}_${file1}"
-    filename=$(echo "${f}" | sed "s/.jpg/$insert.jpg/g")
+    filename=$(echo "${f}" | sed "s/.jpg/$insert.jpg/g" | sed "s/.\///g")
     
     echo "processing with $filename"
 
